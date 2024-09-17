@@ -33,11 +33,12 @@ class Board
     num = 8
 
     puts
+
     @matrix.each do |row|
-      puts "#{num -= 1} #{row.join}"
+      puts "#{num -= 1}  #{row.join}"
     end
 
-    puts "  A B C D E F G H\n\n"
+    puts "\n   A B C D E F G H"
   end
 
   def change_board(cell_one, cell_two)
