@@ -1,15 +1,35 @@
 # board.rb
 # frozen_string_literal: true
 
+require 'rainbow/refinement'
+using Rainbow
+
 class Board
   def initialize
-    @matrix = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE, "\u2B1C") }
+    @matrix = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE, WHITE_SQUARE) }
     @display = display
   end
 
   BOARD_SIZE = 8
 
+  BLACK_SQUARE = "\u2B1B"
+  WHITE_SQUARE = "\u2B1C"
+
+  def black_cells(num = 0)
+    until num == BOARD_SIZE
+
+      if num.even?
+        [1, 3, 5, 7].each { |i| @matrix[num][i] = BLACK_SQUARE unless @matrix[num][i] == '🔴' }
+      else
+        [0, 2, 4, 6].each { |i| @matrix[num][i] = BLACK_SQUARE unless @matrix[num][i] == '🔴' }
+      end
+
+      num += 1
+    end
+  end
+
   def display
+    black_cells
     num = 8
 
     puts
@@ -21,11 +41,7 @@ class Board
   end
 
   def change_board(cell_one, cell_two)
-    @matrix[7 - cell_one][cell_two] = "\u2B1B"
+    @matrix[7 - cell_one][cell_two] = '🔴'
     display
   end
 end
-
-test = Board.new
-test.change_board(2, 5)
-test.change_board(3, 3)
