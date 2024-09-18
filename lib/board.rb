@@ -26,6 +26,8 @@ class Board
   private
 
   def valid_cell?(cell)
+    raise ArgumentError, 'Invalid cell input.' if cell.nil?
+
     cell >= 0 && cell < BOARD_SIZE
   end
 
