@@ -1,47 +1,46 @@
 # board.rb
 # frozen_string_literal: true
 
+require_relative 'move_validator'
+
 class Board
-  attr_accessor :valid_cell
-
-  def initialize
-    @matrix = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE, WHITE_SQUARE) }
-    @display = display
-    # @valid_cell = valid_cell?
-  end
-
   BOARD_SIZE = 8
 
   BLACK_SQUARE = "\u2B1B"
   WHITE_SQUARE = "\u2B1C"
   RED_CIRCLE = "\u2B55"
 
-  def update_board(start = [], finish = [])
-    start_pos = parse_postition(start)
-    finish_pos = parse_postition(finish) unless finish.empty?
-    move = finish.empty? ? [start_pos] : [start_pos, finish_pos]
+  def initialize
+    @matrix = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE, WHITE_SQUARE) }
+    @move_validator = MoveValidator.new
+    @display = display
+  end
 
-    move.each do |cell|
+  def update_board(start = [], finish = [])
+    breakdown_move(start, finish)
+
+    @move.each do |cell|
       raise ArgumentError, 'Invalid cell input.' unless valid_cell?(cell[0]) && valid_cell?(cell[1])
     end
 
-    place_red_circle(start_pos)
-    place_red_circle(finish_pos) unless finish.empty?
+    place_red_circle(@start_pos)
+    place_red_circle(@finish_pos) unless finish.empty?
 
     display
   end
 
-  private
+  def valid_move?(start = [], finish = [])
+    breakdown_move(start, finish)
 
-  def parse_postition(cell)
-    [letter_to_number(cell[0]), cell[1]]
+    @move_validator.valid_knight_move?(start, finish)
   end
 
-  def letter_to_number(cell_two)
-    small_cell_two = cell_two.downcase.to_sym
+  private
 
-    change = { a: 0, b: 1, c: 2, d: 3, e: 4, f: 5, g: 6, h: 7 }
-    change[small_cell_two]
+  def breakdown_move(start = [], finish = [])
+    @start_pos = @move_validator.parse_postition(start)
+    @finish_pos = @move_validator.parse_postition(finish) unless finish.empty?
+    @move = finish.empty? ? [@start_pos] : [@start_pos, @finish_pos]
   end
 
   def valid_cell?(cell)
