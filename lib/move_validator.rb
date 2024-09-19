@@ -3,15 +3,15 @@
 
 class MoveValidator
   def valid_knight_move?(start, finish)
-    start_pos = parse_postition(start)
-    finish_pos = parse_postition(finish)
+    start_pos = parse_position(start)
+    finish_pos = parse_position(finish)
     move_diff = calculate_move_difference(start_pos, finish_pos)
 
     (move_diff[0].abs == 2 && move_diff[1].abs == 1) || (move_diff[0].abs == 1 && move_diff[1].abs == 2)
   end
 
-  def parse_postition(cell)
-    [letter_to_number(cell[0]), cell[1]]
+  def parse_position(array)
+    [letter_to_number(array[0]), array[1]]
   end
 
   private
