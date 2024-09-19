@@ -1,9 +1,10 @@
 # main.rb
 # frozen_string_literal: true
 
-require_relative 'lib/board'
+require_relative 'lib/travel'
 
-test = Board.new
-test.change_board('a', 1)
-test.change_board('D', 5)
-test.change_board('P', 3)
+test = Travel.new
+test.knight_moves(['A', 1], ['h', 8])
+# test.knight_moves(['C', 5])
+# test.knight_moves(['e', 6])
+# test.knight_moves(['d', 8], ['b', 7])
