@@ -24,6 +24,7 @@ GEM
     rubocop-ast (1.32.3)
       parser (>= 3.3.1.0)
     ruby-progressbar (1.13.0)
+    ruby2d (0.12.1)
     unicode-display_width (2.6.0)
 
 PLATFORMS
@@ -31,7 +32,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rainbow (~> 3.1.1)
   rubocop (~> 1.66)
+  ruby2d (~> 0.12.1)
 
 BUNDLED WITH
    2.5.18
