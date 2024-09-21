@@ -1,4 +1,3 @@
-# move_validator.rb
 # frozen_string_literal: true
 
 class MoveValidator
@@ -11,7 +10,9 @@ class MoveValidator
   end
 
   def parse_position(array)
-    [letter_to_number(array[0]), array[1]]
+    x = letter_to_number(array[0])
+    y = array[1] - 1 # Convert chess row to array index (0-based)
+    [x, y]
   end
 
   private
@@ -20,10 +21,7 @@ class MoveValidator
     [start_pos[0] - finish_pos[0], start_pos[1] - finish_pos[1]]
   end
 
-  def letter_to_number(cell_two)
-    small_cell_two = cell_two.downcase.to_sym
-
-    change = { a: 0, b: 1, c: 2, d: 3, e: 4, f: 5, g: 6, h: 7 }
-    change[small_cell_two]
+  def letter_to_number(letter)
+    letter.downcase.ord - 'a'.ord
   end
 end
