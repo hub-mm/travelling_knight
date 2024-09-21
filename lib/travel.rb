@@ -17,6 +17,7 @@ class Travel
     path = find_path(start, finish)
     if path
       puts "\nPath found: #{path}"
+      puts "Path legnth: #{path.length}"
     else
       puts 'No path found.'
     end
