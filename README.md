@@ -4,7 +4,7 @@ Finds and shows, the shortest path for a knight, moving in the classic 'L' shape
 
 <strong>Example:</strong> from A1 -> H8
 
-![Project Screenshot](./knights_shortest_path.png)
+![Project Screenshot](./img/knights_shortest_path.png)
 
 <strong>Clone the repostitory:</strong>
 ```
